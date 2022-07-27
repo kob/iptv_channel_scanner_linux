@@ -61,6 +61,9 @@ int iptvscan(unsigned int ip)
     struct bpf_program filter;
     pcap_compile(device, &filter, strfilter, 1, 0);
     pcap_setfilter(device, &filter);
+    pcap_setnonblock(device, 1, errBuf);
+    pcap_set_immediate_mode(device, 1);
+
 
     usleep(150000);
     struct pcap_pkthdr packet;
